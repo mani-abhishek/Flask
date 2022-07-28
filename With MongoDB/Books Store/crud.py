@@ -1,14 +1,13 @@
-from email.mime import application
-from http.client import OK
-from main import request,books,Response,json,app,jsonify,transaction
 
+from operator import le
+from main import request,books,Response,json,app,jsonify,transaction
 import utils
-from datetime import datetime
+from datetime import date,datetime
 
 def Home():
 	if(request.method == 'GET'):
 
-		data = "hello world" 
+		data = "hello world"
 		return jsonify({'data': data})
 
 
@@ -140,8 +139,7 @@ def Person_Who_Taken_Book():
     print(old_issued,len(t))
     print(current_issued,len(t1))
 
-    return jsonify({"All Person":len(t)+len(t1),f"List of people who have issued {name}= ":{"Count":len(t),"Person Name":old_issued},
-                    f"List of people who currently have {name} book issued":{"Count":len(t1),"Person Name":current_issued }})
+    return jsonify({f"List of people who have issued {name}= ":old_issued,f"List of people who currently have {name} book issued":current_issued })
 
 
 def Total_Rent_Generated_By_Book():
@@ -154,7 +152,7 @@ def Total_Rent_Generated_By_Book():
         rent=rent+ i['total_rent']
 
     
-    return jsonify({"Total Rent Generated till Today":"Rs."+str(rent),"Book Name":name})
+    return str(rent)
 
 def Book_Taken_By_Person():
     book = list()
@@ -190,11 +188,7 @@ def Book_Issue_Between_Date():
     print(from_date,"  ==== ",to_date)
 
     q = list(transaction.find({"issue_date": {"$gte": from_date, "$lte": to_date}}))
-    result =list()
-    for i in q:
-        result.append({"Book Name":i['book_name'],"Person Name":i['issued_person']})
 
     print(len(q))
 
-    return utils.response(result)
-   
+    return utils.response(q)
