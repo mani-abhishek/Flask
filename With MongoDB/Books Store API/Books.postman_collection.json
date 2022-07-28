@@ -1,0 +1,337 @@
+{
+	"info": {
+		"_postman_id": "b5b132fa-047f-4e36-abd0-10de10b3c958",
+		"name": "Books",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "18953813"
+	},
+	"item": [
+		{
+			"name": "API 1",
+			"item": [
+				{
+					"name": "SEARCH BY TERM",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9000/search_by_term?name=java",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"search_by_term"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "java"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK WITHIN PRICE RANGE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9000/books_within_rent_price_range?min=10&max=100",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"books_within_rent_price_range"
+							],
+							"query": [
+								{
+									"key": "min",
+									"value": "10"
+								},
+								{
+									"key": "max",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEARCH",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9000/search?name=java&category=programming language&min=10&max=100",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "java"
+								},
+								{
+									"key": "category",
+									"value": "programming language"
+								},
+								{
+									"key": "min",
+									"value": "10"
+								},
+								{
+									"key": "max",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API 2",
+			"item": [
+				{
+					"name": "BOOK_ISSUE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"book_name\": \"JAva\",\r\n    \"issued_person\":\"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:9000/book_issue"
+					},
+					"response": []
+				},
+				{
+					"name": "RETURN_BOOK",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"book_name\": \"java\",\r\n    \"issued_person\":\"abhishek\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:9000/return_book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API 3",
+			"item": [
+				{
+					"name": "PERSON_WHO_TAKEN_BOOK",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"book_name\":\"data structure using java\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:9000/person_who_taken_book"
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK_TAKEN BY PERSON",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"person_name\":\"Abhishek\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:9000/book_taken_by_person"
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK ISSUE BETWEEN DATE",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.globals.set(\"CurrentDatetime\",moment().format())"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:9000/book_issue_between_date?date1=2022-07-28&date2={{CurrentDatetime}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"book_issue_between_date"
+							],
+							"query": [
+								{
+									"key": "date1",
+									"value": "2022-07-28"
+								},
+								{
+									"key": "date2",
+									"value": "{{CurrentDatetime}}"
+								},
+								{
+									"key": "date2",
+									"value": "2022-07-29",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TOTAL RENT GENERATED BY BOOK",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"book_name\":\"java\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:9000/total_rent_generated_by_book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET_ALL_BOOKS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "java",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:9000/get"
+			},
+			"response": []
+		},
+		{
+			"name": "ADD_BOOK",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"book_name\":\"Oracle\",\r\n    \"category\":\"Database management system\",\r\n    \"rent_per_day\":200\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:9000/add"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_BY_NAME",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:9000/get_by_name/java",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9000",
+					"path": [
+						"get_by_name",
+						"java"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "java",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
