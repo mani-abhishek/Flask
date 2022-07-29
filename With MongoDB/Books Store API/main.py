@@ -11,6 +11,11 @@ books = mongo.db.books
 import crud
 
 
+@app.route("/",methods=['GET'])
+def home():
+    return "Welcome :)"
+
+
 @app.route("/get", methods = ["GET"])
 def get_all_book():
     return crud.Get_All_Books()
